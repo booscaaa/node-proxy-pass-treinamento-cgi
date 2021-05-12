@@ -29,10 +29,10 @@ http://localhost/pgadmin
 ```
 ### Output
 #### Node
-<img src="https://github.com/booscaaa/node-proxy-pass-treinamento-cgi/blob/master/readme-files/nome.PNG" />
+<img src="https://github.com/booscaaa/node-proxy-pass-treinamento-cgi/blob/master/readme-files/node.PNG" />
 <br>
 <br>
 <br>
 
 #### PGAdmin
-<img src="https://github.com/booscaaa/node-proxy-pass-treinamento-cgi/blob/master/readme-files/pgadmin.PNG" />
+<img src="https://github.com/booscaaa/node-proxy-pass-treinamento-cgi/blob/master/readme-files/pgagmin.PNG" />
