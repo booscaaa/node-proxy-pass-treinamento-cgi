@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    ports:
+        - "80:80"
+    networks:
+      - desafio-node
+    depends_on:
+      - db
+      - pgadmin
+      - app
+
+  db:
+    container_name: db
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "app"
+    volumes:
+      - desafio-node-db/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - desafio-node
+      
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "boscardin@vinicius.com"
+      PGADMIN_DEFAULT_PASSWORD: "senhadoboscardin"
+    volumes:
+      - desafio-node-pgadmin:/var/lib/pgadmin
+    depends_on:
+      - db
+    networks:
+      - desafio-node
+
+  app:
+    container_name: app
+    entrypoint: dockerize -wait tcp://db:5432 -timeout 50s docker-entrypoint.sh node index.js
+    build:
+      context: ./app
+    depends_on:
+      - db   
+    networks:
+      - desafio-node 
+
+networks: 
+  desafio-node:
+    driver: bridge
+
+volumes:
+  desafio-node-db:
+  desafio-node-pgadmin:
